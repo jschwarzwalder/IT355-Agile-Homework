@@ -5,7 +5,7 @@
   */
   
   //Connect to database
-  require '../../../db.php';
+  require '../../../PDO_db_Connection.php';
 
     
    //Define the SELECT query
