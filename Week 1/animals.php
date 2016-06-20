@@ -5,41 +5,66 @@
   */
   
   //Connect to database
-  require '../../../PDO_db_Connection.php';
+  require '../../../db.php';
 
     
-   //Define the SELECT query
-    $sql = "SELECT * FROM animals ORDER BY animal_name";
+   //Define the query
+$sql = "INSERT INTO animals(animal_type, animal_name) 
+	VALUES (:type, :name)";
 
-	//Send the query to the database
-    $result = @mysqli_query($cnxn, $sql);
+//Prepare the statement
+$statement = $cnxn->prepare($sql);
 
-	
-	echo '<ul>';
-	//Process the rows
-    while ($row = mysqli_fetch_assoc($result)) {
+//Bind the parameters
+$type = 'kangaroo';
+$name = 'Joey';
+$statement->bindParam(':type', $type, PDO::PARAM_STR);
+$statement->bindParam(':name', $name, PDO::PARAM_STR);
 
-        $name = $row['animal_name'];
-        $type = $row['animal_type'];
-        
-        
-		echo  "<li>$name - $type</li>";        
-	}
-	
-	echo '</ul>';
+//Execute
+$statement->execute();
+
+//Bind the parameters
+$type = 'snake';
+$name = 'Slitherin';
+$statement->bindParam(':type', $type, PDO::PARAM_STR);
+$statement->bindParam(':name', $name, PDO::PARAM_STR);
+
+//Execute
+$statement->execute();
+
+/* UPDATE */
+
+//Define the query
+$sql = "UPDATE animals SET animal_name = :new 
+	WHERE animal_name = :old";
+
+//Prepare the statement
+$statement = $dbh->prepare($sql);
+
+//Bind the parameters
+$old = 'Joey';
+$new = 'Troy';
+$statement->bindParam(':old', $old, PDO::PARAM_STR);
+$statement->bindParam(':new', $new, PDO::PARAM_STR);
+
+//Execute
+$statement->execute();
+
+/* DELETE  */
+
+//Define the query
+$sql = "DELETE FROM animals 
+	WHERE animal_type = :type";
+
+//Prepare the statement
+$statement = $dbh->prepare($sql);
+
+//Bind the parameters
+$type = 'kangaroo';
+$statement->bindParam(':type', $type, PDO::PARAM_STR);
+
+//Execute
+$statement->execute();
+
 ?>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>List of Animals</title>
-  </head>
-  <body>
-	<p><a href="new-animal.php">Add a new Animal</a></p>
-
- 
-  </body>
-</html>    
