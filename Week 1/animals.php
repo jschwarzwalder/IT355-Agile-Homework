@@ -67,4 +67,39 @@ $statement->bindParam(':type', $type, PDO::PARAM_STR);
 //Execute
 $statement->execute();
 
+/* Single Row Display */
+
+//Define the query
+$sql = "SELECT animal_name, animal_type FROM animals 
+	  WHERE animal_id = :id";
+
+//Prepare the statement
+$statement = $dbh->prepare($sql);
+
+//Bind the parameters
+$id = 3;
+$statement->bindParam(':id', $id, PDO::PARAM_INT);
+
+//Execute the statement
+$statement->execute(); 
+
+//Process the result
+$row = $statement->fetch(PDO::FETCH_ASSOC);
+echo $row['animal_name']." - ".$row['animal_type'];
+
+/* Multiple Rows
+//Define the query
+$sql = "SELECT animal_name, animal_type FROM animals";
+
+//Prepare the statement
+$statement = $dbh->prepare($sql);
+
+//Execute the statement
+$statement->execute(); 
+
+//Process the result
+$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+foreach ($result as $row) {	echo $row['animal_type'] . ' - ' 	. $row['animal_name'];
+}
+ */
 ?>
