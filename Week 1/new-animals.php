@@ -16,14 +16,30 @@
 
 <html>
 <head>
+ <meta charset="UTF-8">
+    <!-- IE Edge Meta Tag -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+    <!-- Minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <title>New Animals</title>
 </head>
 
 <body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12 col-md-6 col-md-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-head">
+				<p> Enter a new Animal</p>
+				</div>
+				<div class="panel-body">
 	<?php
 	
-	$name = ;
-    $type = ;
+	$name = '' ;
+    $type = '';
 	
 	
        
@@ -92,22 +108,28 @@
 	}
 ?>
 
-   <form method="post" action="<?= $_SERVER['PHP_SELF']; ?>">
-	
-        
-	<label for="animal_name">Animal Name:
-		<input type="text" name="animal_name" size="20" value="<?php echo $name; ?>"  >
-	</label><br>
-        
-	<label for="animal_type">Animal Type:
-		<input type="text" name="animal_type" size="20" value="<?php echo $type; ?>" >
-	</label><br>
-	
-	<br>
-        
-	<input type="submit" value="Validate" name="submit">
-   </form>
-   
+				   <form method="post" action="<?= $_SERVER['PHP_SELF']; ?>">
+					
+						<div class="form-group text-center">     
+							<label for="animal_name">Animal Name:</label>
+								<input type="text" name="animal_name" size="20" value="<?php echo $name; ?>"  >
+							<br>
+						</div>
+						<div class="form-group text-center">
+						<label for="animal_type">Animal Type:</label>
+							<input type="text" name="animal_type" size="20" value="<?php echo $type; ?>" >
+						<br>
+						
+						<br>
+						</div>
+						
+							<input type="submit" value="Validate" name="submit" class="btn btn-default text-center">
+					</form>
+				</div>  
+			</div>	
+		</div>
+	</div>  
+</div>	
 </body>
 
 </html>
