@@ -99,7 +99,7 @@ $statement->execute();
 
 //Process the result
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-foreach ($result as $row) {	echo $row['animal_type'] . ' - ' 	. $row['animal_name'];
+foreach ($result as $row) {	echo $row['animal_type'] . ' - ' 	. $row['animal_name'];
 }
  */
 ?>
