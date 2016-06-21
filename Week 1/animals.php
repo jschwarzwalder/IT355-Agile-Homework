@@ -33,22 +33,6 @@ echo $row['animal_name']." - ".$row['animal_type'];
 
 */
 
-/* Multiple Rows  */
-//Define the query
-$sql = "SELECT * FROM animals";
-
-//Prepare the statement
-$statement = $dbh->prepare($sql);
-
-//Execute the statement
-$statement->execute(); 
-
-//Process the result
-$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-foreach ($result as $row) {	
-	echo $row['animal_type'] . ' - ' . $row['animal_name'];
-}
-
 
 ?>
 
@@ -61,6 +45,34 @@ foreach ($result as $row) {
     <title>List of Animals</title>
   </head>
   <body>
+  <?php 
+	  /* Multiple Rows  */
+		//Define the query
+		$sql = "SELECT animal_name, animal_type FROM animals;";
+		
+		# echo $sql;
+		
+		//Prepare the statement
+		$statement = $dbh->prepare($sql);
+		
+		print_r($dbh->errorInfo());
+		
+		//Execute the statement
+		$statement->execute(); 
+		
+		print_r( $statement->fetchAll(PDO::FETCH_ASSOC));
+		
+		//Process the result
+		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+		
+		print_r ($result);
+		
+		foreach ($result as $row) {	
+			echo '<p>' . $row['animal_type'] . ' - ' . $row['animal_name']. '</p>';
+		}
+
+
+	?>
 	<p><a href="new-animals.php">Add a new Animal</a></p>
 
  
