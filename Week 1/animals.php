@@ -5,34 +5,7 @@
   */
   
   //Connect to database
-  require '../../../PDO_db_Connection.php';
-
-
-
-/* Single Row Display 
-
-
-
-//Define the query
-$sql = "SELECT animal_name, animal_type FROM animals 
-	  WHERE animal_id = :id";
-
-//Prepare the statement
-$statement = $dbh->prepare($sql);
-
-//Bind the parameters
-$id = 3;
-$statement->bindParam(':id', $id, PDO::PARAM_INT);
-
-//Execute the statement
-$statement->execute(); 
-
-//Process the result
-$row = $statement->fetch(PDO::FETCH_ASSOC);
-echo $row['animal_name']." - ".$row['animal_type'];
-
-*/
-
+  require '../../../PDO.php';
 
 ?>
 
@@ -50,27 +23,27 @@ echo $row['animal_name']." - ".$row['animal_type'];
 		//Define the query
 		$sql = "SELECT animal_name, animal_type FROM animals;";
 		
-		# echo $sql;
+		// echo $sql;
 		
 		//Prepare the statement
 		$statement = $dbh->prepare($sql);
 		
-		print_r($dbh->errorInfo());
+		//print_r($dbh->errorInfo());
 		
 		//Execute the statement
 		$statement->execute(); 
-		
-		print_r( $statement->fetchAll(PDO::FETCH_ASSOC));
+		//print_r($dbh->errorInfo());
+		//print_r( $statement->fetchAll(PDO::FETCH_ASSOC));
 		
 		//Process the result
 		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+		//print_r($statement->errorInfo());
 		
-		print_r ($result);
+		//print_r ($result);
 		
-		foreach ($result as $row) {	
-			echo '<p>' . $row['animal_type'] . ' - ' . $row['animal_name']. '</p>';
+		foreach ($result as $row) {
+		  echo $row['animal_type']. ' - ' . $row['animal_name'];
 		}
-
 
 	?>
 	<p><a href="new-animals.php">Add a new Animal</a></p>
