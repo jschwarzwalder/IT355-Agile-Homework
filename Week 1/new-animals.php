@@ -10,7 +10,7 @@
     error_reporting(E_ALL);
   
 	//Connect to database
-	require '../../../PDO_db_Connection.php';
+	require '../../../PDO.php';
 ?>  
 <!DOCTYPE html>
 
@@ -37,12 +37,9 @@
 				</div>
 				<div class="panel-body">
 	<?php
-	
-	$name = '' ;
-    $type = '';
-	
-	
-       
+	 $name = '';
+	 $type = '';
+	    
     //Form has been submitted 
     if (isset($_POST['submit'])) {
 		
@@ -82,7 +79,7 @@
            
             /* 	PDO insert statement*/
 			//Define the query
-			$sql = "INSERT INTO `animals`(`animal_type`, `animal_name`) VALUES (:type, :name)";
+			$sql = "INSERT INTO `animals`( `animal_name`, `animal_type`) VALUES (:name, :type)";
 				
 			//Prepare the statement
 			$statement = $dbh->prepare($sql);
@@ -90,16 +87,19 @@
 			//Bind the parameters
 			$statement->bindParam(':type', $type, PDO::PARAM_STR);
 			$statement->bindParam(':name', $name, PDO::PARAM_STR);
-
+			
+			print_r($statement);
+			
 			//Execute
 			$statement->execute();
 			
+			print_r($statement);
            
             
 			 //Display summary
-            		echo '<h3 class="text-center">New animal added!</h3>';
-            		echo '<p class="text-center" >Name: $name</p>';
-			echo '<p class="text-center">Type: $type</p>';
+			echo '<h3 class="text-center">New animal added!</h3>';
+			echo '<p class="text-center">Name: ' . $name . '</p>';
+			echo '<p class="text-center">Type: ' . $type . '</p>';
 			echo '<p class="text-center"><a href="animals.php">See results</a></p>';
 			echo '</div></div></div></div></div>';
             return;
