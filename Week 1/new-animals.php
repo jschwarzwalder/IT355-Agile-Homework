@@ -10,7 +10,7 @@
     error_reporting(E_ALL);
   
 	//Connect to database
-	require '../../../db.php';
+	require '../../../PDO_db_Connection.php';
 ?>  
 <!DOCTYPE html>
 
@@ -32,8 +32,8 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-6 col-md-offset-3">
 			<div class="panel panel-default">
-				<div class="panel-head">
-				<p> Enter a new Animal</p>
+				<div class="panel-heading">
+				<h3 class="text-center"> Enter a new Animal</h3>
 				</div>
 				<div class="panel-body">
 	<?php
@@ -48,12 +48,14 @@
 		
 
 	 $isValid = true;
+	 $name = '';
+	 $type = '';
 
  	 //Validate first name
         if (!empty($_POST['animal_name'])) {
             $name = $_POST['animal_name'];
         } else {
-            echo '<p>Please enter the animal\'s name.</p>';
+            echo '<p class="text-center">Please enter the animal\'s name.</p>';
             $isValid = false;
 			$name="";
 	    }
@@ -63,7 +65,7 @@
 		if (!empty($_POST['animal_type'])) {
             $type = $_POST['animal_type'];
         } else {
-            echo '<p>Please enter the animal\'s type.</p>';
+            echo '<p class="text-center">Please enter the animal\'s type.</p>';
             $isValid = false;
 			$type ="";
         }
@@ -75,33 +77,31 @@
 		if ($isValid) {
             
             //Escape the data
-            $name = mysqli_real_escape_string($cnxn, $name);
-            $type = mysqli_real_escape_string($cnxn, $type);
+            //$name = mysqli_real_escape_string($cnxn, $name);
+           // $type = mysqli_real_escape_string($cnxn, $type);
            
-            /* 	PDO insert statement
+            /* 	PDO insert statement*/
 			//Define the query
-			$sql = "INSERT INTO animals(animal_type, animal_name) 
-				VALUES (:type, :name)";
-
+			$sql = "INSERT INTO `animals`(`animal_type`, `animal_name`) VALUES (:type, :name)";
+				
 			//Prepare the statement
 			$statement = $dbh->prepare($sql);
 
 			//Bind the parameters
-			$type = 'kangaroo';
-			$name = 'Joey';
 			$statement->bindParam(':type', $type, PDO::PARAM_STR);
 			$statement->bindParam(':name', $name, PDO::PARAM_STR);
 
 			//Execute
 			$statement->execute();
-			*/
+			
            
             
 			 //Display summary
-            echo "<h3>New animal added!</h3>";
-            echo "<p>Name: $name</p>";
-			echo "<p>Type: $type</p>";
-			echo '<p><a href="animals.php">See results</a></p>';
+            		echo '<h3 class="text-center">New animal added!</h3>';
+            		echo '<p class="text-center" >Name: $name</p>';
+			echo '<p class="text-center">Type: $type</p>';
+			echo '<p class="text-center"><a href="animals.php">See results</a></p>';
+			echo '</div></div></div></div></div>';
             return;
         }
 		
@@ -122,8 +122,8 @@
 						
 						<br>
 						</div>
-						
-							<input type="submit" value="Validate" name="submit" class="btn btn-default text-center">
+					
+							<button type="submit" value="Validate" name="submit" class="btn btn-default pull-right">Submit</button>
 					</form>
 				</div>  
 			</div>	
