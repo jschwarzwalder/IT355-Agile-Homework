@@ -12,20 +12,13 @@ require 'class.Address.inc';
 echo '<h2>Instantiating Address</h2>';
 $address = new Address;
 
-echo '<h2>Empty Address</h2>';
-echo '<tt><pre>' . var_export($address, TRUE) . '</pre></tt>';
-
 echo '<h2>Setting properties...</h2>';
 $address->street_address_1 = '555 Fake Street';
 $address->city_name = 'Townsville';
 $address->subdivision_name = 'State';
-$address->postal_code = '12345';
 $address->country_name = 'United States of America';
 $address->address_type_id = 1;
-echo '<tt><pre>' . var_export($address, TRUE) . '</pre></tt>';
-
-echo '<h2>Displaying address...</h2>';
-echo $address->display();
+echo $address;
 
 echo '<h2>Testing magic __get and __set</h2>';
 unset($address->postal_code);
@@ -33,11 +26,11 @@ echo $address->display();
 
 echo '<h2>Testing Address __construct with an array</h2>';
 $address_2 = new Address(array(
-  'street_address_1' => '123 Phony Ave',
-  'city_name' => 'Villageland',
-  'subdivision_name' => 'Region',
-  'postal_code' => '67890',
-  'country_name' => 'Canada',
+  'street_address_2' => '317 Park Dr.',
+  'city_name' => 'Greenwood',
+  'subdivision_name' => 'White River',
+  'postal_code' => '46143',
+  'country_name' => 'USA',
 ));
 echo $address_2->display();
 
