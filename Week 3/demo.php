@@ -9,31 +9,21 @@
 
 require 'class.Address.inc';
 
-echo '<h2>Making new Address</h2>';
+echo '<h2>Instantiating Address</h2>';
 $address = new Address;
 
-//Display empty address
 echo '<h2>Empty Address</h2>';
 echo '<tt><pre>' . var_export($address, TRUE) . '</pre></tt>';
 
-
-//Asigning values then displaying
 echo '<h2>Setting properties...</h2>';
-$address->street_address_1 = '555 Main Street';
-$address->city_name = 'Our Town';
-$address->subdivision_name = 'IN';
-$address->postal_code = '46143';
-$address->country_name = 'United States';
+$address->street_address_1 = '555 Fake Street';
+$address->city_name = 'Townsville';
+$address->subdivision_name = 'State';
+$address->postal_code = '12345';
+$address->country_name = 'United States of America';
+$address->address_type_id = 1;
 echo '<tt><pre>' . var_export($address, TRUE) . '</pre></tt>';
 
-echo '<h2>Displaying address...</h2>';
-echo $address->display();
-
-//Testing Protected field. This should fail
-echo '<h2>Testing protected access.</h2>';
-echo "Address ID: {$address->_address_id}";
-
-//Week 3
 echo '<h2>Displaying address...</h2>';
 echo $address->display();
 
@@ -49,4 +39,17 @@ $address_2 = new Address(array(
   'postal_code' => '67890',
   'country_name' => 'Canada',
 ));
-echo $address_2->display(); 
+echo $address_2->display();
+
+echo '<h2>Address __toString</h2>';
+echo $address_2;
+
+echo '<h2>Displaying address types...</h2>';
+echo '<tt><pre>' . var_export(Address::$valid_address_types, TRUE) . '</pre></tt>';
+
+echo '<h2>Testing address type ID validation</h2>';
+for ($id = 0; $id <= 4; $id++) {
+  echo "<div>$id: ";
+  echo Address::isValidAddressTypeId($id) ? 'Valid' : 'Invalid';
+  echo "</div>";
+}
