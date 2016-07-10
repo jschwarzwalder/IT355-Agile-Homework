@@ -7,6 +7,7 @@
  */
 
 class Address {
+
   
   const ADDRESS_TYPE_RESIDENCE = 1;
   const ADDRESS_TYPE_BUSINESS = 2;
@@ -129,9 +130,9 @@ class Address {
    * @return string 
    */
   protected function _postal_code_guess() {
-    @db = Database::getInstance();
-	$mysqli = $db->getConnection();	
-	 
+    $db = Database::getInstance();
+    $mysqli = $db->getConnection();
+    
     $sql_query  = 'SELECT postal_code ';
     $sql_query .= 'FROM location ';
     
@@ -146,8 +147,6 @@ class Address {
     if ($row = $result->fetch_assoc()) {
       return $row['postal_code'];
     }
-  }
-	
   }
   
   /**
